@@ -6103,20 +6103,35 @@ body.demo-active .hdr{top:36px}
 
 /* Custom Freelance & Support Card */
 .tk-freelance-card {
-  margin-top: 24px;
-  background: rgba(15, 23, 42, 0.45);
-  border: 1px solid rgba(124, 58, 237, 0.2);
+  margin-top: 0;
+  background: rgba(15, 23, 42, 0.55);
+  border: 1px solid rgba(124, 58, 237, 0.35);
   border-radius: 18px;
-  padding: 24px;
+  padding: 28px;
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+  box-shadow: 
+    0 20px 50px rgba(0, 0, 0, 0.3),
+    0 0 30px rgba(124, 58, 237, 0.18),
+    0 0 10px rgba(6, 182, 212, 0.1);
   text-align: left;
+  position: relative;
+  overflow: hidden;
+}
+.tk-freelance-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, #7C3AED, #06B6D4);
+  box-shadow: 0 1px 10px rgba(124, 58, 237, 0.5);
 }
 html[data-theme="light"] .tk-freelance-card {
-  background: rgba(255, 255, 255, 0.75);
-  border-color: rgba(109, 40, 217, 0.15);
-  box-shadow: 0 10px 30px rgba(15,23,42,0.06);
+  background: rgba(255, 255, 255, 0.8);
+  border-color: rgba(124, 58, 237, 0.25);
+  box-shadow: 
+    0 20px 40px rgba(15, 23, 42, 0.05),
+    0 0 30px rgba(124, 58, 237, 0.08);
 }
 .tk-fc-header {
   display: flex;
@@ -7207,18 +7222,19 @@ html .mob-burger span {
 
       <!-- RIGHT COLUMN -->
       <div class="tk-hero-right fade-up fade-up-d2">
-        <!-- PRE-LOGIN: cube/robot image — swaps between light + dark variants -->
+        <!-- PRE-LOGIN: cube/robot image commented out to highlight freelance support card -->
+        <!--
         <div id="heroDisc" class="tk-hero-image-wrap">
           <img src="hero-banner.png" alt="SF Tools — AI Salesforce Toolkit illustration" class="tk-hero-image tk-hero-image-light" loading="eager"/>
           <img src="hero-banner-dark.png" alt="SF Tools — AI Salesforce Toolkit illustration (dark)" class="tk-hero-image tk-hero-image-dark" loading="eager"/>
         </div>
         <style>
-          /* Show light banner in light mode, dark banner in dark mode */
           img.tk-hero-image-dark { display: none !important; }
           img.tk-hero-image-light { display: block !important; }
           html[data-theme="dark"] img.tk-hero-image-light { display: none !important; }
           html[data-theme="dark"] img.tk-hero-image-dark { display: block !important; }
         </style>
+        -->
 
         <!-- Freelance & Support Card (Pre-login only) -->
         <div class="tk-freelance-card tk-prelogin-only">
