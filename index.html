@@ -6228,17 +6228,19 @@ html[data-theme="light"] .tk-fc-skills li {
   font-weight: bold;
 }
 .tk-fc-actions {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
   gap: 10px;
+  width: 100%;
 }
 .tk-fc-btn {
-  display: inline-flex;
+  display: flex;
   align-items: center;
+  justify-content: center;
   gap: 6px;
-  padding: 10px 16px;
+  padding: 10px 8px;
   border-radius: 10px;
-  font-size: 12.5px;
+  font-size: 12px;
   font-weight: 600;
   text-decoration: none;
   transition: all 0.2s ease;
@@ -6247,13 +6249,26 @@ html[data-theme="light"] .tk-fc-skills li {
   border: none;
 }
 .tk-fc-btn-primary {
+  grid-column: span 3;
+  justify-content: center;
   background: linear-gradient(135deg, #7C3AED, #2563EB);
   color: #ffffff !important;
   box-shadow: 0 4px 12px rgba(124, 58, 237, 0.25);
+  font-size: 13.5px;
+  padding: 12px 16px;
 }
 .tk-fc-btn-primary:hover {
   transform: translateY(-1px);
   box-shadow: 0 6px 16px rgba(124, 58, 237, 0.35);
+}
+@media (max-width: 440px) {
+  .tk-fc-actions {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+  .tk-fc-btn-primary {
+    grid-column: span 1;
+  }
 }
 .tk-fc-btn-wa {
   background: rgba(37, 211, 102, 0.12);
