@@ -6171,10 +6171,35 @@ html[data-theme="light"] .tk-fc-headline {
   font-size: 12.5px;
   color: #94a3b8;
   line-height: 1.6;
-  margin: 0 0 20px 0;
+  margin: 0 0 16px 0;
 }
 html[data-theme="light"] .tk-fc-desc {
   color: #475569;
+}
+.tk-fc-skills {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px 16px;
+  margin: 0 0 24px 0;
+  padding: 0;
+  list-style: none;
+}
+@media (max-width: 500px) {
+  .tk-fc-skills { grid-template-columns: 1fr; }
+}
+.tk-fc-skills li {
+  font-size: 12px;
+  color: #e2e8f0;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+html[data-theme="light"] .tk-fc-skills li {
+  color: #334155;
+}
+.tk-fc-skills li span {
+  color: #10B981;
+  font-weight: bold;
 }
 .tk-fc-actions {
   display: flex;
@@ -7242,10 +7267,18 @@ html .mob-burger span {
             <span class="tk-fc-dot"></span>
             <span class="tk-fc-title">Custom Development & Consulting</span>
           </div>
-          <h3 class="tk-fc-headline">🛠️ Need Custom Salesforce Development?</h3>
+          <h3 class="tk-fc-headline">🛠️ Need Custom Salesforce Development &amp; Support?</h3>
           <p class="tk-fc-desc">
-            Get custom Lightning Web Components (LWC), robust Apex triggers, and API integrations designed by the creator of SalesforceTools.in. Let's collaborate to build secure, scalable solutions for your Salesforce Org.
+            Get direct access to senior-level expertise. The creator of SalesforceTools.in is available for freelance contracts, custom development, integrations, and ongoing administrator/developer support. We specialize in building robust, secure, and highly optimized solutions tailored to your business.
           </p>
+          <ul class="tk-fc-skills">
+            <li><span>✦</span> Custom LWC &amp; Aura Components</li>
+            <li><span>✦</span> Apex Classes, Triggers &amp; Batch Jobs</li>
+            <li><span>✦</span> Third-Party API &amp; REST Integrations</li>
+            <li><span>✦</span> Declarative Flows &amp; Process Automation</li>
+            <li><span>✦</span> Sandbox Setup, CI/CD &amp; SFDX Deployments</li>
+            <li><span>✦</span> Org Optimization, Security &amp; Code Review</li>
+          </ul>
           <div class="tk-fc-actions">
             <a href="https://salesforce-developer-portfolio-9zml.vercel.app/" target="_blank" class="tk-fc-btn tk-fc-btn-primary">
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
