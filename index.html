@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8"/>
@@ -6101,6 +6101,113 @@ body.demo-active .hdr{top:36px}
 }
 .tk-hero-image { width: 100%; height: 100%; object-fit: contain; display: block; }
 
+/* Custom Freelance & Support Card */
+.tk-freelance-card {
+  margin-top: 24px;
+  background: rgba(15, 23, 42, 0.45);
+  border: 1px solid rgba(124, 58, 237, 0.2);
+  border-radius: 18px;
+  padding: 24px;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+  text-align: left;
+}
+html[data-theme="light"] .tk-freelance-card {
+  background: rgba(255, 255, 255, 0.75);
+  border-color: rgba(109, 40, 217, 0.15);
+  box-shadow: 0 10px 30px rgba(15,23,42,0.06);
+}
+.tk-fc-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+.tk-fc-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: #10B981;
+  box-shadow: 0 0 8px #10B981;
+}
+.tk-fc-title {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #c4b5fd;
+}
+html[data-theme="light"] .tk-fc-title {
+  color: #6D28D9;
+}
+.tk-fc-headline {
+  font-size: 17px;
+  font-weight: 800;
+  color: #ffffff;
+  margin: 0 0 10px 0;
+  line-height: 1.3;
+  font-family: 'Inter', system-ui, sans-serif !important;
+}
+html[data-theme="light"] .tk-fc-headline {
+  color: #0F172A;
+}
+.tk-fc-desc {
+  font-size: 12.5px;
+  color: #94a3b8;
+  line-height: 1.6;
+  margin: 0 0 20px 0;
+}
+html[data-theme="light"] .tk-fc-desc {
+  color: #475569;
+}
+.tk-fc-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.tk-fc-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 16px;
+  border-radius: 10px;
+  font-size: 12.5px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  font-family: 'Inter', system-ui, sans-serif;
+  cursor: pointer;
+  border: none;
+}
+.tk-fc-btn-primary {
+  background: linear-gradient(135deg, #7C3AED, #2563EB);
+  color: #ffffff !important;
+  box-shadow: 0 4px 12px rgba(124, 58, 237, 0.25);
+}
+.tk-fc-btn-primary:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(124, 58, 237, 0.35);
+}
+.tk-fc-btn-wa {
+  background: rgba(37, 211, 102, 0.12);
+  color: #25D366 !important;
+  border: 1px solid rgba(37, 211, 102, 0.25) !important;
+}
+.tk-fc-btn-wa:hover {
+  background: rgba(37, 211, 102, 0.2);
+  border-color: rgba(37, 211, 102, 0.4) !important;
+}
+.tk-fc-btn-tg {
+  background: rgba(14, 165, 233, 0.12);
+  color: #0ea5e9 !important;
+  border: 1px solid rgba(14, 165, 233, 0.25) !important;
+}
+.tk-fc-btn-tg:hover {
+  background: rgba(14, 165, 233, 0.2);
+  border-color: rgba(14, 165, 233, 0.4) !important;
+}
+
 /* SECTION HEADS */
 .tk-section { max-width: 1240px; margin: 0 auto; padding: 64px 24px; background: #FFFFFF; color: #0F172A; }
 .tk-section-head { text-align: center; margin-bottom: 40px; }
@@ -7112,6 +7219,32 @@ html .mob-burger span {
           html[data-theme="dark"] img.tk-hero-image-light { display: none !important; }
           html[data-theme="dark"] img.tk-hero-image-dark { display: block !important; }
         </style>
+
+        <!-- Freelance & Support Card (Pre-login only) -->
+        <div class="tk-freelance-card tk-prelogin-only">
+          <div class="tk-fc-header">
+            <span class="tk-fc-dot"></span>
+            <span class="tk-fc-title">Custom Development & Consulting</span>
+          </div>
+          <h3 class="tk-fc-headline">🛠️ Need Custom Salesforce Development?</h3>
+          <p class="tk-fc-desc">
+            Get custom Lightning Web Components (LWC), robust Apex triggers, and API integrations designed by the creator of SalesforceTools.in. Let's collaborate to build secure, scalable solutions for your Salesforce Org.
+          </p>
+          <div class="tk-fc-actions">
+            <a href="https://salesforce-developer-portfolio-9zml.vercel.app/" target="_blank" class="tk-fc-btn tk-fc-btn-primary">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
+              Hire the Developer
+            </a>
+            <a href="https://wa.me/919948152545" target="_blank" class="tk-fc-btn tk-fc-btn-wa">
+              <svg width="14" height="14" fill="currentColor" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
+              WhatsApp
+            </a>
+            <a href="https://t.me/Srinadhsfdc9" target="_blank" class="tk-fc-btn tk-fc-btn-tg">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></svg>
+              Telegram
+            </a>
+          </div>
+        </div>
 
         <!-- POST-LOGIN: existing live org dashboard (preserved) -->
         <div id="heroConn" style="display:none">
