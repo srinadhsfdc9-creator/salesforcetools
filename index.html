@@ -6253,13 +6253,39 @@ html[data-theme="light"] .tk-fc-skills li {
   justify-content: center;
   background: linear-gradient(135deg, #7C3AED, #2563EB);
   color: #ffffff !important;
-  box-shadow: 0 4px 12px rgba(124, 58, 237, 0.25);
+  box-shadow: 0 4px 12px rgba(124, 58, 237, 0.25), 0 0 0 rgba(124, 58, 237, 0);
   font-size: 13.5px;
   padding: 12px 16px;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.tk-fc-btn-primary::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -60%;
+  width: 25%;
+  height: 200%;
+  background: linear-gradient(
+    to right,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.4) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  transform: rotate(25deg);
+  animation: tk-btn-shimmer 3s infinite ease-in-out;
 }
 .tk-fc-btn-primary:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 6px 16px rgba(124, 58, 237, 0.35);
+  transform: translateY(-2px);
+  box-shadow: 
+    0 8px 24px rgba(124, 58, 237, 0.45), 
+    0 0 16px rgba(37, 99, 235, 0.45);
+}
+@keyframes tk-btn-shimmer {
+  0% { left: -60%; }
+  35% { left: 140%; }
+  100% { left: 140%; }
 }
 @media (max-width: 440px) {
   .tk-fc-actions {
@@ -6277,7 +6303,9 @@ html[data-theme="light"] .tk-fc-skills li {
 }
 .tk-fc-btn-wa:hover {
   background: rgba(37, 211, 102, 0.2);
-  border-color: rgba(37, 211, 102, 0.4) !important;
+  border-color: rgba(37, 211, 102, 0.6) !important;
+  transform: translateY(-2px);
+  box-shadow: 0 0 14px rgba(37, 211, 102, 0.4);
 }
 .tk-fc-btn-tg {
   background: rgba(14, 165, 233, 0.12);
@@ -6286,7 +6314,9 @@ html[data-theme="light"] .tk-fc-skills li {
 }
 .tk-fc-btn-tg:hover {
   background: rgba(14, 165, 233, 0.2);
-  border-color: rgba(14, 165, 233, 0.4) !important;
+  border-color: rgba(14, 165, 233, 0.6) !important;
+  transform: translateY(-2px);
+  box-shadow: 0 0 14px rgba(14, 165, 233, 0.4);
 }
 
 /* Email Button Styling */
@@ -6297,8 +6327,10 @@ html[data-theme="light"] .tk-fc-skills li {
 }
 .tk-fc-btn-email:hover, .tk-fc-btn-email.active-btn {
   background: rgba(124, 58, 237, 0.22);
-  border-color: rgba(124, 58, 237, 0.45) !important;
+  border-color: rgba(124, 58, 237, 0.6) !important;
   color: #c4b5fd !important;
+  transform: translateY(-2px);
+  box-shadow: 0 0 14px rgba(124, 58, 237, 0.4);
 }
 html[data-theme="light"] .tk-fc-btn-email {
   background: rgba(109, 40, 217, 0.08);
