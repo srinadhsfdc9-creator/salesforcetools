@@ -1,0 +1,26 @@
+name = "sfproxy"
+main = "sf-proxy-worker.js"
+compatibility_date = "2024-09-02"
+
+[[kv_namespaces]]
+binding = "AI_TOKENS"
+id = "9922bf22b841467ca5ae9ba62ccb376a"
+
+# ── Secrets (set via CLI — never commit real values) ──────────────
+# Run these commands one by one:
+#
+#   npx wrangler secret put ANTHROPIC_API_KEY
+#   → paste your sk-ant-api03-... key
+#
+#   npx wrangler secret put RAZORPAY_KEY_SECRET
+#   → paste your rzp_test_... secret
+#
+#   npx wrangler secret put RESEND_API_KEY
+#   → paste your re_... key from resend.com
+#
+#   npx wrangler secret put ADMIN_KEY
+#   → paste any strong password (e.g. sftools-admin-2026)
+
+# ── Public vars (safe to commit) ──────────────────────────────────
+[vars]
+RAZORPAY_KEY_ID = "rzp_test_Sm2rQpaHBXEbc6"

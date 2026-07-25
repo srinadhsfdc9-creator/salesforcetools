@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "html-preview",
+      "runtimeExecutable": "C:\\WINDOWS\\System32\\cmd.exe",
+      "runtimeArgs": ["/c", "powershell", "-ExecutionPolicy", "Bypass", "-File", "C:\\Users\\2350468\\Desktop\\SF_Package\\.claude\\serve.ps1"],
+      "port": 3000
+    }
+  ]
+}

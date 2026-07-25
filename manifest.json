@@ -1,0 +1,19 @@
+{
+  "name": "SF Tools — Salesforce Developer Toolkit",
+  "short_name": "SF Tools",
+  "description": "Free Salesforce developer tools — package.xml generator, SOQL builder, code diff, formatter, code analyzer & more. 100% offline.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#FAF7F2",
+  "theme_color": "#4F6CF7",
+  "orientation": "any",
+  "categories": ["developer", "productivity", "utilities"],
+  "icons": [
+    {
+      "src": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='56' y1='32' x2='456' y2='448'%3E%3Cstop offset='0%25' stop-color='%23748FFC'/%3E%3Cstop offset='40%25' stop-color='%234F6CF7'/%3E%3Cstop offset='100%25' stop-color='%232B47B8'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpath d='M256 32L456 144V336L256 448L56 336V144Z' fill='url(%23g)'/%3E%3Cpath d='M168 200C148 200 140 212 140 228V244C140 260 128 268 116 268C128 268 140 276 140 292V308C140 324 148 336 168 336' stroke='%23fff' stroke-width='18' stroke-linecap='round' fill='none'/%3E%3Cpath d='M344 200C364 200 372 212 372 228V244C372 260 384 268 396 268C384 268 372 276 372 292V308C372 324 364 336 344 336' stroke='%23fff' stroke-width='18' stroke-linecap='round' fill='none'/%3E%3Cpolygon points='290,125 238,262 274,262 232,400 310,245 270,245 305,125' fill='%23FFD43B'/%3E%3C/svg%3E",
+      "sizes": "512x512",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

@@ -1,0 +1,64 @@
+async function depFind() {
+  if (!SF.isConnected()) { sfOpenModal(); return; }
+  const name = document.getElementById('depName').value.trim();
+  const type = document.getElementById('depType').value;
+  if (!name) { toast('Enter a component name','warn'); return; }
+  const btn = document.getElementById('depFindBtn');
+  if (btn) { btn.disabled = true; btn.innerHTML = '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg> Searching…'; }
+  document.getElementById('depResults').style.display = 'none';
+  document.getElementById('depEmpty').innerHTML = '<div class="dep-status-wrap"><div class="dep-status-ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.8"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div><div class="dep-status-title">Searching dependencies…</div><div class="dep-status-sub">Querying Tooling API…</div></div>';
+  document.getElementById('depEmpty').style.display = 'block';
+  document.getElementById('depRefByList').innerHTML = '<div class="dep-empty-state">Loading…</div>';
+  document.getElementById('depDependsOnList').innerHTML = '<div class="dep-empty-state">Loading…</div>';
+  try {
+    const nameField = ['ApexClass', 'ApexTrigger'].includes(type) ? 'Name' : 'DeveloperName';
+    const idRes = await sfToolingQuery(`SELECT Id, ${nameField} FROM ${type} WHERE ${nameField}='${name.replace(/'/g,"\\'")}' LIMIT 1`);
+    let compId = (idRes.records[0] || {}).Id || '';
+    if (!compId) {
+      const altField = nameField === 'Name' ? 'DeveloperName' : 'Name';
+      try {
+        const idRes2 = await sfToolingQuery(`SELECT Id, ${altField} FROM ${type} WHERE ${altField}='${name.replace(/'/g,"\\'")}' LIMIT 1`);
+        if (!idRes2.records.length) throw new Error(`"${name}" not found as ${type}. Check the name and type.`);
+        compId = idRes2.records[0].Id;
+      } catch(altErr) {
+        throw new Error(`"${name}" not found as ${type}. Check the name and type.`);
+      }
+    }
+    let _depApiErr = '';
+    const [refByRes, dependsOnRes] = await Promise.all([
+      sfToolingQuery(`SELECT RefMetadataComponentId,RefMetadataComponentName,RefMetadataComponentType FROM MetadataComponentDependency WHERE MetadataComponentId='${compId}' LIMIT 200`).catch(e => { _depApiErr = e.message; return {records:[]}; }),
+      sfToolingQuery(`SELECT MetadataComponentId,MetadataComponentName,MetadataComponentType FROM MetadataComponentDependency WHERE RefMetadataComponentId='${compId}' LIMIT 200`).catch(e => { _depApiErr = _depApiErr || e.message; return {records:[]}; })
+    ]);
+    if (_depApiErr) {
+      const isPermErr = /INSUFFICIENT_ACCESS|not supported|INVALID_TYPE|INVALID_FIELD|permission|sObject type/i.test(_depApiErr);
+      if (isPermErr) {
+        document.getElementById('depEmpty').innerHTML = '<div class="dep-status-wrap"><div class="dep-status-ico" style="background:rgba(239,68,68,.12)"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="1.8"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div><div class="dep-status-title" style="color:#ef4444">API Permission Required</div><div class="dep-status-sub">MetadataComponentDependency requires <strong>View All Data</strong> system permission. Developer Edition orgs often do not support it. Ask your Salesforce admin to grant this permission.</div></div>';
+        document.getElementById('depEmpty').style.display = 'block';
+        document.getElementById('depResults').style.display = 'none';
+        toast('⚠️ Dependency API not accessible — check org permissions', 'warn');
+        return;
+      }
+      toast('⚠️ Dependency API: ' + _depApiErr.slice(0, 60), 'warn');
+    }
+    const typeLabel = document.getElementById('depType').options[document.getElementById('depType').selectedIndex].text;
+    const renderList = (el, recs, nf, tf) => {
+      if (!recs.length) { el.innerHTML = '<div class="dep-empty-state"><svg style="width:28px;height:28px;opacity:.2;display:block;margin:0 auto 8px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><circle cx="12" cy="12" r="10"/><line x1="8" y1="12" x2="16" y2="12"/></svg>None found</div>'; return; }
+      el.innerHTML = recs.map(r => `<div class="dep-item"><span class="dep-type-badge">${r[tf]||'—'}</span><span class="dep-item-name">${r[nf]||r.RefMetadataComponentId||'—'}</span></div>`).join('');
+    };
+    renderList(document.getElementById('depRefByList'), dependsOnRes.records, 'MetadataComponentName', 'MetadataComponentType');
+    renderList(document.getElementById('depDependsOnList'), refByRes.records, 'RefMetadataComponentName', 'RefMetadataComponentType');
+    document.getElementById('depRefByCount').textContent = dependsOnRes.records.length;
+    document.getElementById('depDependsOnCount').textContent = refByRes.records.length;
+    const lbl = document.getElementById('depResultsLabel');
+    if (lbl) lbl.textContent = name + ' (' + typeLabel + ')';
+    document.getElementById('depResults').style.display = 'block';
+    document.getElementById('depEmpty').style.display = 'none';
+    toast('✅ Dependencies loaded for ' + name, 'success');
+  } catch(e) {
+    const detail = e.message || 'Unknown error';
+    document.getElementById('depEmpty').innerHTML = '<div class="dep-status-wrap"><div class="dep-status-ico" style="background:rgba(239,68,68,.12)"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg></div><div class="dep-status-title" style="color:#ef4444">Search Failed</div><div class="dep-status-sub">' + detail + '</div></div>';
+    toast('❌ ' + detail.slice(0, 80), 'error');
+  } finally {
+    if (btn) { btn.disabled = false; btn.innerHTML = '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg> Find Dependencies'; }
+  }
+}

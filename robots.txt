@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://salesforcetools.in/sitemap.xml
+
+# SF Tools — Free Salesforce Developer Toolkit
+# All pages are accessible and indexable
