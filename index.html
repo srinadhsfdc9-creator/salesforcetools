@@ -6136,25 +6136,51 @@ html[data-theme="light"] .tk-freelance-card {
 .tk-fc-header {
   display: flex;
   align-items: center;
+  justify-content: space-between;
   gap: 8px;
-  margin-bottom: 12px;
+  margin-bottom: 16px;
 }
-.tk-fc-dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background-color: #10B981;
-  box-shadow: 0 0 8px #10B981;
-}
-.tk-fc-title {
-  font-size: 11px;
+.tk-fc-title-main {
   font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  color: #c4b5fd;
+  font-size: 11.5px;
+  color: #f1f5f9;
+  letter-spacing: -0.1px;
+  line-height: 1.2;
+  font-family: 'Inter', system-ui, sans-serif;
 }
-html[data-theme="light"] .tk-fc-title {
-  color: #6D28D9;
+html[data-theme="light"] .tk-fc-title-main {
+  color: #0F172A;
+}
+.tk-fc-active-status {
+  font-size: 9.5px;
+  color: #94a3b8;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-family: 'Inter', system-ui, sans-serif;
+  margin-top: 1px;
+}
+html[data-theme="light"] .tk-fc-active-status {
+  color: #475569;
+}
+.tk-fc-active-dot {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  background-color: #10B981;
+  border-radius: 50%;
+  box-shadow: 0 0 6px #10B981;
+}
+.tk-fc-badge {
+  font-size: 10px;
+  color: #10B981;
+  background: rgba(16, 185, 129, 0.1);
+  border: 1px solid rgba(16, 185, 129, 0.2);
+  padding: 2px 8px;
+  border-radius: 99px;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  font-family: 'Inter', system-ui, sans-serif;
 }
 .tk-fc-headline {
   font-size: 17px;
@@ -7385,8 +7411,22 @@ html .mob-burger span {
         <!-- Freelance & Support Card (Pre-login only) -->
         <div class="tk-freelance-card tk-prelogin-only">
           <div class="tk-fc-header">
-            <span class="tk-fc-dot"></span>
-            <span class="tk-fc-title">Custom Development & Consulting</span>
+            <div style="display: flex; align-items: center; gap: 8px;">
+              <div style="width: 28px; height: 28px; border-radius: 50%; background: linear-gradient(135deg, #7C3AED, #2563EB); display: flex; align-items: center; justify-content: center; box-shadow: 0 0 10px rgba(124, 58, 237, 0.4); border: 1.5px solid rgba(255,255,255,0.15); flex-shrink: 0;">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5">
+                  <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                  <circle cx="12" cy="7" r="4" />
+                </svg>
+              </div>
+              <div style="display: flex; flex-direction: column;">
+                <span class="tk-fc-title-main">Srinadh | Freelance</span>
+                <span class="tk-fc-active-status">
+                  <span class="tk-fc-active-dot"></span>
+                  Active Now
+                </span>
+              </div>
+            </div>
+            <span class="tk-fc-badge">Verified Dev</span>
           </div>
           <h3 class="tk-fc-headline">🛠️ Need Custom Salesforce Development &amp; Support?</h3>
           <p class="tk-fc-desc">
@@ -7480,8 +7520,9 @@ html .mob-burger span {
                 const result = await response.json();
                 if (response.status === 200 && result.success) {
                   statusDiv.className = 'tk-fc-status status-success';
-                  statusDiv.innerText = 'Message sent! I will get back to you shortly.';
+                  statusDiv.innerText = '🎉 Message sent! I will get back to you shortly.';
                   form.reset();
+                  triggerConfetti();
                   setTimeout(() => {
                     document.getElementById('heroContactFormContainer').classList.remove('active');
                     document.querySelector('.tk-fc-btn-email').classList.remove('active-btn');
@@ -7498,6 +7539,77 @@ html .mob-burger span {
                 submitBtn.disabled = false;
                 submitBtn.innerHTML = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg> Send Direct Message`;
               }
+            }
+
+            function triggerConfetti() {
+              const canvas = document.createElement('canvas');
+              canvas.style.position = 'fixed';
+              canvas.style.inset = '0';
+              canvas.style.width = '100vw';
+              canvas.style.height = '100vh';
+              canvas.style.pointerEvents = 'none';
+              canvas.style.zIndex = '99999';
+              document.body.appendChild(canvas);
+
+              const ctx = canvas.getContext('2d');
+              let width = canvas.width = window.innerWidth;
+              let height = canvas.height = window.innerHeight;
+
+              window.addEventListener('resize', () => {
+                width = canvas.width = window.innerWidth;
+                height = canvas.height = window.innerHeight;
+              });
+
+              const colors = ['#7C3AED', '#2563EB', '#06B6D4', '#10B981', '#F59E0B', '#EC4899'];
+              const particles = [];
+
+              for (let i = 0; i < 80; i++) {
+                particles.push({
+                  x: Math.random() * width,
+                  y: Math.random() * -height - 20,
+                  r: Math.random() * 6 + 4,
+                  d: Math.random() * 100 + 40,
+                  color: colors[Math.floor(Math.random() * colors.length)],
+                  tilt: Math.random() * 10 - 5,
+                  tiltAngleIncremental: Math.random() * 0.07 + 0.02,
+                  tiltAngle: 0
+                });
+              }
+
+              let animationFrame;
+              function draw() {
+                ctx.clearRect(0, 0, width, height);
+                let remaining = false;
+
+                particles.forEach(p => {
+                  p.tiltAngle += p.tiltAngleIncremental;
+                  p.y += (Math.cos(p.d) + 3 + p.r / 2) / 2;
+                  p.x += Math.sin(p.tiltAngle);
+                  p.tilt = Math.sin(p.tiltAngle - (particles.indexOf(p) / 3)) * 15;
+
+                  if (p.y <= height) {
+                    remaining = true;
+                    ctx.beginPath();
+                    ctx.lineWidth = p.r;
+                    ctx.strokeStyle = p.color;
+                    ctx.moveTo(p.x + p.tilt + p.r / 2, p.y);
+                    ctx.lineTo(p.x + p.tilt, p.y + p.tilt + p.r / 2);
+                    ctx.stroke();
+                  }
+                });
+
+                if (remaining) {
+                  animationFrame = requestAnimationFrame(draw);
+                } else {
+                  canvas.remove();
+                }
+              }
+
+              draw();
+              setTimeout(() => {
+                cancelAnimationFrame(animationFrame);
+                canvas.remove();
+              }, 5000);
             }
           </script>
         </div>
